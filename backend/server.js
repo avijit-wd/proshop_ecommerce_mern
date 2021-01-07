@@ -5,16 +5,20 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import productRoutes from "./router/productRoutes.js";
+import userRoutes from "./router/userRoutes.js";
 dotenv.config();
 const app = express();
 
 connectDB();
+
+app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
