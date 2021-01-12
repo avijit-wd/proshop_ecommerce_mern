@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-const PlaceOrderScreen = ({ history }) => {
+const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const cart = useSelector((state) => state.cart);
   cart.itemsPrice = cart.cartItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)

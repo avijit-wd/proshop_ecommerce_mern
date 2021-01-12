@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Table, Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -7,13 +8,14 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { LinkContainer } from "react-router-bootstrap";
 
-const ProfileScreen = ({ history, location }) => {
+const ProfileScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
@@ -32,7 +34,7 @@ const ProfileScreen = ({ history, location }) => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user.name) {
+      if (!user?.name) {
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {

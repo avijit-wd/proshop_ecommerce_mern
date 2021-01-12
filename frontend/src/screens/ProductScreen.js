@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import {
@@ -15,19 +16,20 @@ import { listProductDetails } from "../actions/productAction";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-const ProductScreen = ({ match, history }) => {
+const ProductScreen = () => {
   const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-
+  const history = useHistory();
+  const { id } = useParams();
   useEffect(() => {
-    dispatch(listProductDetails(match.params.id));
-  }, [dispatch, match]);
+    dispatch(listProductDetails(id));
+  }, [dispatch, id]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${id}?qty=${qty}`);
   };
   return (
     <>

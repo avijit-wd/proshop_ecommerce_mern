@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -7,13 +7,15 @@ import Loader from "../components/Loader";
 import { register } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 
-const RegisterScreen = ({ history, location }) => {
+const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
+  const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);

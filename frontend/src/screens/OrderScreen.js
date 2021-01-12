@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
@@ -9,9 +9,10 @@ import Message from "../components/Message";
 import { PayPalButton } from "react-paypal-button-v2";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = () => {
+  const { id } = useParams();
   const [sdkReady, setSdkReady] = useState(false);
-  const orderId = match.params.id;
+  const orderId = id;
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
