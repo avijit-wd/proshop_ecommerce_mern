@@ -58,7 +58,7 @@ const ProductListScreen = () => {
     successCreate,
   ]);
 
-  const deleteHandler = (id) => {
+  const deleteHandler = (id, image) => {
     if (window.confirm("Are you sure?")) {
       dispatch(deleteProduct(id));
     }
@@ -118,7 +118,7 @@ const ProductListScreen = () => {
                   <Button
                     variant="danger"
                     className="btn-sm"
-                    onClick={() => deleteHandler(product._id)}
+                    onClick={() => deleteHandler(product._id, product.image)}
                   >
                     <i className="fas fa-trash"></i>
                   </Button>

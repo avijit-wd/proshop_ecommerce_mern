@@ -8,7 +8,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import productRoutes from "./router/productRoutes.js";
 import userRoutes from "./router/userRoutes.js";
 import orderRoutes from "./router/orderRoutes.js";
-import uploadRoutes from "./router/uploadRoutes.js";
+import uploadRoute from "./router/uploadRoute.js";
 dotenv.config();
 const app = express();
 
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== "production") {
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/uploads", uploadRoutes);
+app.use("/api/upload", uploadRoute);
 
 app.get("/api/config/paypal", (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
