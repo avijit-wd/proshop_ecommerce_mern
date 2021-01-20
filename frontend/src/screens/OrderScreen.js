@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
@@ -18,6 +18,7 @@ import {
 
 const OrderScreen = () => {
   const { id } = useParams();
+  const history = useHistory();
   const [sdkReady, setSdkReady] = useState(false);
   const orderId = id;
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ const OrderScreen = () => {
   const { success: successDeliver, loading: loadingDeliver } = orderDeliver;
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
       const script = document.createElement("script");
